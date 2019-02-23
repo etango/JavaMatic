@@ -1,4 +1,4 @@
-import java.util.*;
+
 public class Main_Menu {
 
 	/*
@@ -9,15 +9,16 @@ public class Main_Menu {
 	 * 
 	 * Version: 1.0.0.0
 	 * 
+	 * Date: 2/22/2019
+	 * updated
+	 * By Elton
+	 * 
+	 * Changes were main for all the classes. Refer to commit message.
+	 * 
 	 */
 	public static void main(String[] args) {
-		
-	
-		Menu_Creation a = new Menu_Creation();
-		a.printCurrentInventory();
-		a.getMenu();
-		a.MenuSelection();
-		
+
+		Menu_Creation menu = new Menu_Creation();
 		
 		
 	}
