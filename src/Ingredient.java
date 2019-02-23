@@ -3,15 +3,28 @@ import java.util.*;
 /*
  * 2/21/2019
  * This class is handling the ingredients for the drinks.
+ * 
+ * Date: 2/22/2019
+ * updated
+ * By Elton
+ * 
+ * Revised constructor to no handle ingredlist add anymore.
+ * Task was left to setter method and have the getter method handle the ingredients list.
+ * This allows easier implementation for future ingredients. 
  */
-public class Ingredient extends Cost_of_Ingredient {
+public class Ingredient extends Recipe{
 
 
 	
 	protected List<String> ingredlist = new ArrayList<>();
+
 	
 	
 	Ingredient(){
+		
+	}
+	
+	public void setIngredient(){
 		ingredlist.add("Coffee");
 		ingredlist.add("Decaf Coffee");
 		ingredlist.add("Sugar");
@@ -22,11 +35,10 @@ public class Ingredient extends Cost_of_Ingredient {
 		ingredlist.add("Cocoa");
 		ingredlist.add("Whipped Cream");
 	}
-	
-	public String getIngredient(int x){
+	public List<String> getIngredient(){
 		
 		
-		return ingredlist.get(x);
+		return ingredlist;
 	}
 	
 	
