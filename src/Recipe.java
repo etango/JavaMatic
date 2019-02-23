@@ -1,13 +1,17 @@
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /*
- * This class will handle our recipe for each drinks 
- *
+ * This class will handle our recipe for each drinks
+ * 
+ *  Date: 2/22/2019
+ * updated
+ * By Elton
+ * Revised setter and getter method.
+ * Constructor no longer perform Recipe added to HashMap.
+ * Have getRecipe to return the recipe base on the argument it receives. 
  */
-public class Recipe extends Inventory{
+public class Recipe {
 
 	/*
 	 * By using HashMap, we are able to store the new of ingredient and quantity it will be using to make.
@@ -21,11 +25,15 @@ public class Recipe extends Inventory{
 	protected HashMap<String, Integer> Caffe_Americano = new HashMap<String, Integer>();
 	protected HashMap<String, Integer> Caffe_Mocha = new HashMap<String, Integer>();
 	protected HashMap<String, Integer> Cappuccino = new HashMap<String, Integer>();
-	Inventory inv = new Inventory();
+	
+	
 
 	
 	Recipe(){
 		
+	}
+	
+	public void setRecipe() {
 		Coffee.put("Coffee", 3);
 		Coffee.put("Sugar", 1);
 		Coffee.put("Cream", 1);
@@ -43,67 +51,23 @@ public class Recipe extends Inventory{
 		Cappuccino.put("Steamed Milk", 1);
 		Cappuccino.put("Foamed Milk", 1);
 	
+
 	}
 	
-	/*
-	 * This method will check if the drink avaliable to be sold or not. Takes an argument of drink and check the drink ingredients that currently in stock.
-	 * If they are in stock they value true will returned if falsed. The value will be false.
-	 */
-	public boolean getDrinkStatus(String Drink) {
-		
-		boolean status = true;
-		if(Drink == "Coffee") {
-			
-			for(Map.Entry<String, Integer> entry : Coffee.entrySet()) {
-				status = inv.checkInventory(entry.getKey(),entry.getValue());
-				if(status == false) {
-					System.out.print("Out of stock:" + Drink);
-				}
-			}	
+	public HashMap<java.lang.String, Integer> getRecipe(String Drink) {
+		if (Drink == "Coffee") {
+			return Coffee;
+		}else if(Drink == "Decaf Coffee") {
+			return Decaf_Coffee;
+		}else if(Drink == "Caffe Latte") {
+			return Caffe_Latte;
+		}else if(Drink == "Caffe Americano") {
+			return Caffe_Americano;
+		}else if(Drink == "Caffe Mocha") {
+			return Caffe_Mocha;
+		}else if (Drink == "Cappuccino") {
+			return Cappuccino;
 		}
-		if(Drink == "Decaf Coffee") {
-			for(Map.Entry<String, Integer> entry : Decaf_Coffee.entrySet()) {
-				status = inv.checkInventory(entry.getKey(),entry.getValue());
-				if(status == false) {
-					System.out.print("Out of stock:" + Drink);
-				}
-			}
-		}
-		if(Drink == "Caffe Latte") {
-			for(Map.Entry<String, Integer> entry : Caffe_Latte.entrySet()) {
-				status = inv.checkInventory(entry.getKey(),entry.getValue());
-				if(status == false) {
-					System.out.print("Out of stock:" + Drink);
-				}
-			}
-		}
-		if(Drink == "Caffe Americano") {
-			for(Map.Entry<String, Integer> entry : Caffe_Americano.entrySet()) {
-				status = inv.checkInventory(entry.getKey(),entry.getValue());
-				if(status == false) {
-					System.out.print("Out of stock:" + Drink);
-				}
-			}
-		}
-		if(Drink == "Caffe Mocha") {
-			for(Map.Entry<String, Integer> entry : Caffe_Mocha.entrySet()) {
-				status = inv.checkInventory(entry.getKey(),entry.getValue());
-				if(status == false) {
-					System.out.print("Out of stock:" + Drink);
-				}
-			}	
-		}
-		if(Drink == "Cappuccino") {
-			for(Map.Entry<String, Integer> entry : Cappuccino.entrySet()) {
-				status = inv.checkInventory(entry.getKey(),entry.getValue());
-				if(status == false) {
-					System.out.print("Out of stock:" + Drink);
-				}
-		}
-		
-		
-		}
-		return status;
+		return null;
 	}
-	
 }
