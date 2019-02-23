@@ -94,8 +94,7 @@ public class Menu_Creation extends Drinks {
 					}
 					
 					if(num) {
-						//System.out.println("checking status:" + d1.getDrinkStatus(d1.drink_list.get(Integer.parseInt(selection)-1)));
-						if(Integer.parseInt(selection)  >= 0 && Integer.parseInt(selection) <= drinkListSize()) {
+						if(Integer.parseInt(selection)  > 0 && Integer.parseInt(selection) <= drinkListSize()) {
 					
 							if(getDrinkStatus(getDrink(Integer.parseInt(selection)-1))) {
 								getDrinks(getDrink(Integer.parseInt(selection)-1));
