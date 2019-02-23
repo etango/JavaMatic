@@ -1,11 +1,5 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.SortedMap;
 import java.util.TreeMap;
 
 /*
@@ -14,53 +8,52 @@ import java.util.TreeMap;
  * It will initialize the inventory when the program is first executed then manage the inventories from then.
  * Checking if we have enough ingredient to make the drink and keep tracking of inventories count.
  * Still in draft phase
+ * 
+ * Date: 2/22/2019
+ * updated
+ * By Elton
+ * Revised Inventory and no long have constructor initializing the initalstockinventory.
+ * Ran into an issue where inventory wasn't being updated correctly. It would update but reset to is initial inventory later when calling it again for status check.
+ * This was mainly issue when calling it in a different class and presented it with a different object. This was developer error but fixes was applied and the application has been updated
+ * and tested to run properly and consistently.
+ * updated initailStockInventory to take a List as an argument for future scaling of the ingredient to be easier.
  */
 
 public class Inventory extends Ingredient {
-
 	
-	private SortedMap<String, Integer> ingre = new TreeMap<String, Integer>();
-		
+	protected Map<String, Integer> ingre = new TreeMap<String, Integer>();
+	
+	
+
 	Inventory(){
-		this.initalStockInventory();
 	}
 	
 	/*
 	 * This is run when the program is first launched and fully stock the inventory.
 	 */
-	public void initalStockInventory() {
-	
+	public void initalStockInventory(List <String> ingredlist) {
 		
-		for (int i=0;i<this.ingredlist.size();i++) {
-			ingre.put(this.ingredlist.get(i), 10);
+		for (int i=0;i<ingredlist.size();i++) {
+			ingre.put(ingredlist.get(i), 10);
+			
 		}
 	}
 	
 	public void restockInventory() {
-		
-		
 		for(int i=0;i<ingre.size();i++) {
-			ingre.put(this.ingredlist.get(i), 10);
+			ingre.put(ingredlist.get(i), 10);
 			}
-		}
+
+	}
 	
 	/*
 	 * This is checking for inventory status by taking an argument of the ingredient type and the amount being used.
 	 */
-	public boolean checkInventory(String ingredient, int amount) {
-		
-		boolean check = true;
-		if(ingre.get(ingredient) >= amount) {
-			check = true;
-		}else if(ingre.get(ingredient) < amount) {
-			check = false;
-		}
-		
-		return check;
-	}
 	
-	public void updateInventory() {
+	public void updateInventory(String ingredient, int quantity) {
 		
+		int stock = ingre.get(ingredient)-quantity;
+		ingre.put(ingredient, stock);
 	}
 	
 	/*
@@ -70,9 +63,21 @@ public class Inventory extends Ingredient {
 		
 		System.out.println("Inventory:");
 		for (Map.Entry<String, Integer> entry : ingre.entrySet()) {
-			System.out.println("\t  "+entry.getKey() + "," + entry.getValue());
+			System.out.println(entry.getKey() + "," + entry.getValue());
 		}
 	
 				
+	}
+	
+public boolean checkInventory(String ingredient, int amount) {
+		
+		boolean check = true;
+		if(ingre.get(ingredient) >= amount) {
+			check = true;
+		}else if(ingre.get(ingredient) < amount) {
+			check = false;
+		}
+		
+		return check;
 	}
 }
