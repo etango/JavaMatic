@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.*;
 
 /*
@@ -5,25 +6,42 @@ import java.util.*;
  *This menu_creation class objective is to create the menu for a coffee dispensing machine.
  *This will handle menu creation. 
  *
- *
+ *Date: 2/22/2019
+ *updated
+ *By Elton
+ *The constructor in Menu_Creation will handle all the execution. Removed all object calling from different classes. Extends from appropriately class to call method properly. 
+ *Was having issue with Hashmap holding proper value because calling different new object from different classes that reset that Hashmap list.
+ *Cleaned up and run smoother
+ *Revised Try and catch method to confirm if user selected a number correlating with menu item and check if it's within bound of the menu options.
+ *Added for application to continue running properly by displaying menu and show updated inventory after user selected an option.
  */
 
 
 public class Menu_Creation extends Drinks {
 	/*
-	 * Declaring type of datastructure I will using. I will be using array list to store drinks name.
+	 * Declaring type of data structure I will using. I will be using array list to store drinks name.
 	 * Naming the object later I will refer to down below.
 	 *
 	 */
 	protected ArrayList<String> drink_list = new ArrayList<String>();
-	Drinks d1 = new Drinks();
-	Recipe r1 = new Recipe();
+	boolean run = true;
+	Scanner input = new Scanner(System.in);
+	DecimalFormat df = new DecimalFormat("0.00");
+
 	
 	Menu_Creation(){
+		
+		setIngredient();
+		setRecipe();
+		initalStockInventory(getIngredient());
+		setDrinks();
+		printCurrentInventory();
+		getMenu();
+		MenuSelection();
+		
 	}
 	
 	public void setMenu() {
-		
 	}
 	
 	
@@ -34,12 +52,11 @@ public class Menu_Creation extends Drinks {
 	 * We will also be putting the cost and the status of drink here.
 	 */
 	public void getMenu() {
-		
 		int count =1;
 		System.out.println("Menu:");
-		for(int i=0;i<d1.drink_list.size();i++) {
-			
-			System.out.println("\t  " + count + "," + d1.drink_list.get(i)+","+","+getDrinkStatus(d1.drink_list.get(i)));
+		//System.out.println("Drink list size " + drinkListSize()  );
+		for(int i=0;i<drinkListSize();i++) {
+			System.out.println(count + "," + getDrink(i)+",$"+df.format(getCostDrink(getDrink(i)))+","+getDrinkStatus(getDrink(i)));
 			count ++;
 		}
 		
@@ -48,35 +65,56 @@ public class Menu_Creation extends Drinks {
 	/*
 	 * We will be taking user input from scanner then running a if else statement with a try to check for menu option selected.
 	 * The try and catch method is to check if the user input a valid integer once converted from a string and check to see if it's within the menu option of drink.
+	 * 1st update: 2/21/2019
+	 * added while loop to continue to run the program as long run = true. When user select q or Q then run will be false.
+	 * The while loop will continue to run for user selection and print inventory and menu.
 	 */
 	public void MenuSelection() {
-		Scanner input = new Scanner(System.in);
-		String selection = input.nextLine();
-	
-		if (selection.equalsIgnoreCase("r")) {
-			System.out.println("case 1 checked");
+		while(run) {
 			
-		}else if(selection.equalsIgnoreCase("q")) {
-			System.out.println("case 2 checked");
+			String selection = input.next();
+			if (selection.equalsIgnoreCase("r")) {
+				this.restockInventory();
+			}else if(selection.equalsIgnoreCase("q")) {
+				run = false;
+				break;
 			
-		}else if(selection != null) {
-			
-			try {
-				int number = Integer.parseInt(selection);
-				if(number > d1.drink_list.size()) {
-					System.out.println("Invalid Selection: " + selection);
-				}else
-				System.out.println(d1.drink_list.get(number-1));
+			}else if(selection.isEmpty()) {
+				run = true;
+			}else if(selection != "") {
+				boolean num = false;
+				try {
+					@SuppressWarnings("unused")
+					int number = Integer.parseInt(selection);
+					num = true;
+					
+					}catch (NumberFormatException e) {
+						num = false;
+						System.out.println("Invalid Selection: " + selection);
+					}
+					
+					if(num) {
+						//System.out.println("checking status:" + d1.getDrinkStatus(d1.drink_list.get(Integer.parseInt(selection)-1)));
+						if(Integer.parseInt(selection)  >= 0 && Integer.parseInt(selection) <= drinkListSize()) {
+					
+							if(getDrinkStatus(getDrink(Integer.parseInt(selection)-1))) {
+								getDrinks(getDrink(Integer.parseInt(selection)-1));
+								System.out.println("Dispensing:" + getDrink(Integer.parseInt(selection)-1));
+							}else
+								System.out.println("Out of Stock");
+					
+						}else
+							System.out.println("Invalid Selection:" + selection);
+					
+					}
+
+						
 				
-			}catch (NumberFormatException e) {
-				System.out.println("Invalid Selection: " + selection);
 			}
-			
-		}	
-		
+
+			printCurrentInventory();
+			getMenu();
+		}
 	}
-	
-	
-	
-	
 }
+	
