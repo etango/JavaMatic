@@ -1,4 +1,6 @@
 # JavaMatic
+Main sources code are in src folder.
+Main_Menu.java will run the program by compiling it.
 
 Problem Description:
 Your task is to create a simulator of an automatic coffee dispensing machine, called the JavaMatic.
