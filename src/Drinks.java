@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 /*
@@ -24,6 +23,10 @@ public class Drinks extends Inventory{
 	Drinks(){
 	}
 	
+	/*
+	 * @setDrinks
+	 * this will add the list of drink into the array list then we have collections framework sort feature to sort the drinks in order.
+	 */
 	public void setDrinks() {
 		drink_list.add("Coffee");
 		drink_list.add("Decaf Coffee");
@@ -34,15 +37,25 @@ public class Drinks extends Inventory{
 		Collections.sort(drink_list);
 	}
 	
+	/*
+	 * @drinkListSize 
+	 * This method just return the size of the drink. The purpose of this when we use the for loop we don't have to update it when we modify the drink list.
+	 * 
+	 */
 	public int drinkListSize() {
 		return drink_list.size();
 	}
 	
+	/*
+	 * @getDrink
+	 * Method just return the drink depends on the iteration.
+	 */
 	public String getDrink(int i) {
 		return drink_list.get(i);
 	}
 	
 	/*
+	 * @getDrinkStatus
 	 * This method will check if the drink avaliable to be sold or not. Takes an argument of drink and check the drink ingredients that currently in stock.
 	 * If they are in stock they value true will returned if falsed. The value will be false.
 	 */
@@ -104,6 +117,11 @@ public class Drinks extends Inventory{
 		return status;
 	}
 	
+	/*
+	 * @getDrinks
+	 * This method is designed to handle the selection of the drink and take the ingredients and quantity it takes to make the drink and deducted from the inventory.
+	 * By calling the update method and entering the type of ingredients and the quantity of it.
+	 */
 	public void getDrinks(String Drink) {
 		if(Drink == "Coffee") {
 			
@@ -140,9 +158,11 @@ public class Drinks extends Inventory{
 	}
 	
 	/*
+	 * @getCostDrink
+	 * 
 	 * Added an if else statement to take to check the argument for which drink was selected.
-	 * After the drink is determine, we get the cost of the drink by using the method getCost(name of the ingredient, the amount of it)
-	 * and get the returned sum of and add it to cost. We cycle through all the ingredients.
+	 * After the drink is determined, we get the cost of the drink by using the method getCost(name of the ingredient, the amount of it)
+	 * and get the returned sum of and add it to cost. We cycle through all the ingredients and return the sum of those ingredient and add it to the cost.
 	 * We have cost set at 0.00 at the top so the cost will be reset to zero after it's done returning the cost.
 	 */
 	public double getCostDrink(String Drink) {

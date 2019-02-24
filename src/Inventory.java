@@ -20,7 +20,6 @@ import java.util.TreeMap;
  */
 
 public class Inventory extends Ingredient {
-	
 	protected Map<String, Integer> ingre = new TreeMap<String, Integer>();
 	
 	
@@ -29,6 +28,7 @@ public class Inventory extends Ingredient {
 	}
 	
 	/*
+	 * @initialStockInventory
 	 * This is run when the program is first launched and fully stock the inventory.
 	 */
 	public void initalStockInventory(List <String> ingredlist) {
@@ -38,7 +38,10 @@ public class Inventory extends Ingredient {
 			
 		}
 	}
-	
+	/*
+	 * @restockInventory
+	 * When menu option r or R is selected this method will be called and restock all the ingredient to 10.
+	 */
 	public void restockInventory() {
 		for(int i=0;i<ingre.size();i++) {
 			ingre.put(ingredlist.get(i), 10);
@@ -47,6 +50,7 @@ public class Inventory extends Ingredient {
 	}
 	
 	/*
+	 * @updateInventory
 	 * This is checking for inventory status by taking an argument of the ingredient type and the amount being used.
 	 */
 	
@@ -57,6 +61,7 @@ public class Inventory extends Ingredient {
 	}
 	
 	/*
+	 * @printCurrentInventory
 	 * This will print out the current inventory when called upon.
 	 */
 	public void printCurrentInventory() {
@@ -69,6 +74,10 @@ public class Inventory extends Ingredient {
 				
 	}
 	
+	/*
+	 * checkInventory
+	 * This will handling checking inventory if the current inventory has enough ingredients to make the drink by checking the name of ingredient and quantity from the argument and comparing it to the list. 
+	 */
 public boolean checkInventory(String ingredient, int amount) {
 		
 		boolean check = true;

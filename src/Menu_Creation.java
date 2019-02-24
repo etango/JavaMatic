@@ -31,6 +31,14 @@ public class Menu_Creation extends Drinks {
 	
 	Menu_Creation(){
 		
+		
+	}
+	
+	/*
+	 * @setMenu()
+	 * This will handle the menu operation when the program is first run.
+	 */
+	public void setMenu() {
 		setIngredient();
 		setRecipe();
 		initalStockInventory(getIngredient());
@@ -38,14 +46,11 @@ public class Menu_Creation extends Drinks {
 		printCurrentInventory();
 		getMenu();
 		MenuSelection();
-		
-	}
-	
-	public void setMenu() {
 	}
 	
 	
 	/*
+	 * @getMenu
 	 * Creating the drink menu by running a for loop and setting count 1.
 	 * Purpose of count will be to list the drink correlating with the number for menu selection later.
 	 * Using our methods from drink_list that we created we will get the drinks name base on the iteration of i.
@@ -54,7 +59,6 @@ public class Menu_Creation extends Drinks {
 	public void getMenu() {
 		int count =1;
 		System.out.println("Menu:");
-		//System.out.println("Drink list size " + drinkListSize()  );
 		for(int i=0;i<drinkListSize();i++) {
 			System.out.println(count + "," + getDrink(i)+",$"+df.format(getCostDrink(getDrink(i)))+","+getDrinkStatus(getDrink(i)));
 			count ++;
@@ -63,11 +67,14 @@ public class Menu_Creation extends Drinks {
 	}
 	
 	/*
+	 * @MenuSelection
 	 * We will be taking user input from scanner then running a if else statement with a try to check for menu option selected.
 	 * The try and catch method is to check if the user input a valid integer once converted from a string and check to see if it's within the menu option of drink.
 	 * 1st update: 2/21/2019
 	 * added while loop to continue to run the program as long run = true. When user select q or Q then run will be false.
 	 * The while loop will continue to run for user selection and print inventory and menu.
+	 * If else statement went setup to handle any error or any number out of list range and negative number that might be inputed.
+	 * 
 	 */
 	public void MenuSelection() {
 		while(run) {

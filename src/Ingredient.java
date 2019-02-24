@@ -24,6 +24,10 @@ public class Ingredient extends Recipe{
 		
 	}
 	
+	/*
+	 * @setIngredient
+	 * Handle the first operation of adding ingredients to the list later that will be called to inventory.
+	 */
 	public void setIngredient(){
 		ingredlist.add("Coffee");
 		ingredlist.add("Decaf Coffee");
@@ -35,18 +39,15 @@ public class Ingredient extends Recipe{
 		ingredlist.add("Cocoa");
 		ingredlist.add("Whipped Cream");
 	}
+	
+	/*
+	 * @setIngredient
+	 * this will method will just return the ingredient list.
+	 */
 	public List<String> getIngredient(){
 		
 		
 		return ingredlist;
-	}
-	
-	
-	public String setDrinkIngredient(String x) {
-		
-		
-		
-		return null;
 	}
 	
 }

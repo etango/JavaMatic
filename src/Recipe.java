@@ -1,5 +1,4 @@
 import java.util.HashMap;
-import java.util.Map;
 
 /*
  * This class will handle our recipe for each drinks
@@ -33,6 +32,12 @@ public class Recipe {
 		
 	}
 	
+	/*
+	 * @setRecipe
+	 * This method is just handling the ingredients and quantity that are needed for the drink and adding them respectively to the list.
+	 * By nameing each drink as the object of the Hashmap we are able to add the ingredient and quantity we need to use.
+	 * This helps us later because we can determine the cost of the drink, status of the drink, and update our inventory.
+	 */
 	public void setRecipe() {
 		Coffee.put("Coffee", 3);
 		Coffee.put("Sugar", 1);
@@ -54,6 +59,11 @@ public class Recipe {
 
 	}
 	
+	/*
+	 * @getRecipe 
+	 * This method is just returning the drink ingredients list whenever called on.
+	 * This mainly for checking inventory status and cost.
+	 */
 	public HashMap<java.lang.String, Integer> getRecipe(String Drink) {
 		if (Drink == "Coffee") {
 			return Coffee;
