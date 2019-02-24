@@ -1,5 +1,5 @@
 # JavaMatic
-Main sources code are in src folder.
+Main sources code are in src/JavaMatic folder.
 Main_Menu.java will run the program by compiling it.
 
 Problem Description:
